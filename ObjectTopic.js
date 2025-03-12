@@ -67,3 +67,29 @@ for(let key of Reflect.ownKeys(book))
 {
 	console.log(key);
 }
+//*********COPING OBJECTS********************
+let target = {x : 1};
+let source = {y : 2, z : 3};
+for(let key of Object.keys(source))
+{
+	target[key] = source[key];
+}
+for(let [key, value] of Object.entries(target))
+{
+	console.log(key + " = " + value);
+}
+Object.assign(target, source); //we copy entries from source to target
+//We old values will bo overrided
+for(let [key, value] of Object.entries(target))
+{
+	console.log(key + " = " + value);
+}
+//***************SERIALIZATION******************
+let text = JSON.stringify(book);
+console.log("serialized text = "+text);
+let newObj = JSON.parse(text);
+console.log("deserialized object");
+for(let [key, value] of Object.entries(newObj))
+{
+	console.log(key + " = " + value);
+}
