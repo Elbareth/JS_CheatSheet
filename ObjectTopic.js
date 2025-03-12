@@ -42,4 +42,28 @@ console.log("Is author in book = "+book.hasOwnProperty("author"));
 //However it returns False when the property is only inherited
 console.log("Inherited value = "+book.hasOwnProperty("toSting")); 
 //It return True when the proprty exists and it is enumerable
-console.log("Exist and is enumerable = "+book.propertyIsEnumerable("author")); 
+console.log("Exist and is enumerable = "+book.propertyIsEnumerable("author"));
+//show own proprties names (not inherited)
+//It also not show non-enumerable properties and properties
+//that were described by symbol
+for(let key of Object.keys(book))
+{
+	console.log(key);
+}
+//show own proprties names (not inherited)
+//It show enumerable properites and properties
+//that were described by symbol
+for(let name of Object.getOwnPropertyNames(book))
+{
+	console.log(name);
+}
+//It returns all symbols within the object
+for(let symbol of Object.getOwnPropertySymbols(book))
+{
+	console.log(symbol);
+}
+//Return all properites possbile
+for(let key of Reflect.ownKeys(book))
+{
+	console.log(key);
+}
