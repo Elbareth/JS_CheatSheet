@@ -30,3 +30,16 @@ for(let [key, value] of Object.entries(obj4))
 {
 	console.log(key +" = "+value);
 }
+var isSuccess = delete book.title; //we delete the attribute from the object
+console.log(isSuccess); //the method delete retunrs true when we successfully
+//delete the attribute
+//the attribute never existed in the first place - no action occurred
+//or when we wrongly use ths method
+var isTitleInBook = "title" in book; //we check if attribute exists in obj
+console.log("Is title in book = " + isTitleInBook);
+//We check if the attribute exists within the object
+console.log("Is author in book = "+book.hasOwnProperty("author")); 
+//However it returns False when the property is only inherited
+console.log("Inherited value = "+book.hasOwnProperty("toSting")); 
+//It return True when the proprty exists and it is enumerable
+console.log("Exist and is enumerable = "+book.propertyIsEnumerable("author")); 
