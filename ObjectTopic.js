@@ -93,3 +93,16 @@ for(let [key, value] of Object.entries(newObj))
 {
 	console.log(key + " = " + value);
 }
+//*************METHOD**************************
+let point = {
+	x : 1.1,
+  y : 2.2,
+  toString: function() {return "x = "+ this.x + " y = " + this.y;},
+  toLocaleString: function() {return "x = "+ this.x.toLocaleString() + " y = " + this.y.toLocaleString();},
+  valueOf: function() {return this.x + this.y;}, //calculate primitive value in some way ;p
+  toJSON: function() {return `(${this.x}, ${this.y})`;}
+};
+console.log(point.toString());
+console.log(point.toLocaleString()); //toString with local configuration
+console.log(point.valueOf()); //convert object into primitive value
+console.log(JSON.stringify([point])); //we create JSON
