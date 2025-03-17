@@ -100,9 +100,24 @@ let point = {
   toString: function() {return "x = "+ this.x + " y = " + this.y;},
   toLocaleString: function() {return "x = "+ this.x.toLocaleString() + " y = " + this.y.toLocaleString();},
   valueOf: function() {return this.x + this.y;}, //calculate primitive value in some way ;p
-  toJSON: function() {return `(${this.x}, ${this.y})`;}
+  toJSON: function() {return `(${this.x}, ${this.y})`;},
+  methodES6() {return "The new way of creating method"}
 };
 console.log(point.toString());
 console.log(point.toLocaleString()); //toString with local configuration
 console.log(point.valueOf()); //convert object into primitive value
 console.log(JSON.stringify([point])); //we create JSON
+let xxx = {x : 1, xx:2, xxx: 3};
+let yyy = {y : 1, yy:2, yyy: 3};
+let newXXXYYY = {x : 5, y :5, ...xxx, ...yyy}; //we copy the values from objects into one new object. We overwrite the old values
+for(let [key, value] of Object.entries(newXXXYYY))
+{
+	console.log(key + " = " + value);
+}
+//************GETTER****SETTER*****************
+let obj150 =
+{
+	someData: 150,
+  get accessorSomeData() {return this.someData},
+  set accessorSomeData(someData) {this.someData = someData}
+}
