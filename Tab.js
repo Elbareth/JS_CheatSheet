@@ -86,3 +86,38 @@ for(let i = 0; i < tab10.length; i++)
 {
     console.log(tab10[i]);
 }
+//*************HOW TO ITERATE***********************
+console.log("We iterate tab5 for/of")
+for(let elem of tab5)
+{
+	console.log(elem);
+}
+console.log("We return entries with index of it")
+for(let [index, elem] of tab5.entries()) //entries method return index from table
+{
+	console.log(index + " = " + elem);
+}
+//ATTENTION! forEach will ommit undefined element of the array!
+console.log("forEach");
+tab5.forEach((index, it) => console.log(index + " = " + it));
+//MAP - we call the method for each element and return it
+//We return the NEW array. We don't modidy the old one!
+console.log("map");
+tab5.map(it => it+"-"+it).forEach(it => console.log(it));
+//Filter - it filter the value via function
+console.log("Filter");
+tab5.filter(it => [...'heloworld'].includes(it)).forEach(it => console.log(it));
+//We want to find specific element
+console.log("We found letter = " + tab5.find(it => it > 'w'));
+console.log("We found the index of that letter = " + tab5.findIndex(it => it > 'w'));
+console.log("We found nothing (undefined) = " + tab5.find(it => it < 'a'));
+console.log("We found nothing (-1) = " + tab5.findIndex(it => it < 'a'));
+console.log("We check if every element of the array is string = " +tab5.every(it => typeof it === "string"));
+console.log("We check if any (at least one) element of the array isNaN = " +tab5.some(it => it.isNaN));
+console.log("We reduce the array to one value = " + tab5.reduce((x,y) => x+y, "")); //the second parameter is initial value. If initial value is empty, the first element of the array will be initial value
+console.log("We reduce the array to one value = " + tab5.reduceRight((x,y) => x+y)); //desc order
+console.log("We flat the array one level = "+[1,[2,[3]]].flat());
+console.log("We flat the array few levels = "+[1,[2,[3]]].flat(2));
+console.log("We flat the array one level = "+[1,[2,[3]]].flatMap(it => it*it)); //it means tab.map().flat() but it is more sufficient
+//concat - we create a copy of the array - NEW array!
+console.log("We connect the array with new values = " + [1,2,3].concat(4,5));
