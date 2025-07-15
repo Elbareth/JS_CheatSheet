@@ -121,3 +121,34 @@ console.log("We flat the array few levels = "+[1,[2,[3]]].flat(2));
 console.log("We flat the array one level = "+[1,[2,[3]]].flatMap(it => it*it)); //it means tab.map().flat() but it is more sufficient
 //concat - we create a copy of the array - NEW array!
 console.log("We connect the array with new values = " + [1,2,3].concat(4,5));
+//It will flat our table
+console.log("We connect the array with new values = " + [1,2,3].concat([4,5]));
+//It won't flat our table
+let tab11 = [1,2,3];
+tab11.push([[4,5]]);
+console.log("We push the array with new values = " + tab11);
+console.log("Slice = "+[1,2,3,4,5].slice(0,3)); //part of the table - from the beginning until the end
+//splice will delete and (optionaly) add elements
+let indexSplice = 2;
+let amountOfElementsWeWantToDelete = 3;
+let elementWeWantToAdd = [1,2,3];
+let tab12 = [1,2,3,4,5,6,7,8,9];
+tab12.splice(indexSplice, amountOfElementsWeWantToDelete);
+console.log("We remove the elements = " +tab12);
+tab12.splice(indexSplice, amountOfElementsWeWantToDelete, elementWeWantToAdd);
+console.log("We remove and then add new elements = "+tab12);
+let tab13 = new Array(10);
+//fill will fill our table automacicaly
+let elementWeWantToAddFill = 7;
+let beginningImdex = 2;
+let endIndex = 5;
+console.log("Whole table of 7s " + tab13.fill(elementWeWantToAddFill));
+elementWeWantToAddFill = 8;
+console.log("We change the table to have 8s "+tab13.fill(elementWeWantToAddFill, beginningImdex));
+elementWeWantToAddFill = 9;
+console.log("We add the new element once more "+tab13.fill(elementWeWantToAddFill, beginningImdex, endIndex));
+let startIndexToCopy = 2;
+let startIndexOfCopy = 4;
+let endIndexOfCopy = 5;
+let tab14 = [1,2,3,4,5,6,7,8,9];
+console.log("Copy within = "+tab14.copyWithin(startIndexToCopy, startIndexOfCopy, endIndexOfCopy));
