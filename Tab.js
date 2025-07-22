@@ -152,3 +152,21 @@ let startIndexOfCopy = 4;
 let endIndexOfCopy = 5;
 let tab14 = [1,2,3,4,5,6,7,8,9];
 console.log("Copy within = "+tab14.copyWithin(startIndexToCopy, startIndexOfCopy, endIndexOfCopy));
+
+console.log("We find element under index " + [1,2,3,5].indexOf(5));
+console.log("We don't find element under index " + [1,2,3,5].indexOf(4)); //Will return -1
+console.log("We find element under index (we look from the end)" + [5,1,2,3,5].lastIndexOf(5));
+console.log("We don't find element under index (we look from the end)" + [5,1,2,3,5].lastIndexOf(4)); //Will return -1
+console.log("The starting point in both method can be different!" + [5,1,2,3,5].lastIndexOf(5, -2));
+console.log("The starting point in both method can be different!" + [5,1,2,3,5].indexOf(5, 2));
+
+console.log("My element exist in table "+[1,2,3,NaN].includes(3));
+console.log("My element does not exist in table "+[1,2,3,NaN].includes(4));
+console.log("In my table NaN element exist "+[1,2,3,NaN].includes(NaN));
+console.log("But my NaN element is not find by this method "+[1,2,3,NaN].indexOf(NaN));
+
+console.log("Sort my table "+[1,10,2,20,3,30].sort());
+console.log("This time sort correctly "+[1,10,2,20,3,30].sort((a,b) => a-b));
+console.log("Reverse the order "+[1,10,2,20,3,30].sort((a,b) => a-b).reverse());
+
+console.log("Create pretty string from the table "+[1,2,3,4,5,6].join("; "))
