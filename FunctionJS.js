@@ -51,3 +51,41 @@ function checkScope()
     return fun; //We NOT call the function yet!
 }
 console.log(checkScope()()); //We call the function right now! Remember - the scope = where it was defined
+
+console.log("The amount of arguments = "+anyAmountOfParameters.length);
+console.log("The name of the function = "+anyAmountOfParameters.name);
+console.log("The body of the function (usually) = "+anyAmountOfParameters.toString);
+
+//We can call the function in context of Object
+//Because of that it change this 
+//It works as the function is was a method
+const obj =
+{
+     name : "OBJ"
+}
+function fun()
+{
+  console.log("Hello world = "+this.name);
+}
+fun();
+fun.call(obj); //We can put the arguments as a single values - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+fun.apply(obj); //We can put the arguments as an array - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply
+
+//We can also bind the function - We bind this!
+//Arrow function do not operate on bind!
+function xyz(y) { return this.x + y};
+const obj2 = { x : 1};
+let callFunction = xyz.bind(obj2); //We bind the function to the Object
+console.log(callFunction(5));
+let newObj  = 
+{
+  x : 45,
+  callFunction
+};
+console.log(newObj.callFunction(5)); //The method is still bind to the different method
+
+//anonymous function
+//Created each time it was called
+//Always global scope
+const fun2 = new Function("x", "y", "return x + y;"); //We create the function via constructor
+console.log(fun2(15,30));
