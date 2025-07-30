@@ -1,1 +1,1 @@
-# JS_CheetSheet
+# JS_CheatSheet
