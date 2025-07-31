@@ -60,6 +60,17 @@ console.log(myNewObjConstructor.toString());
 console.log("Is my object a member of that class ? ");
 //It will return true even if the prototype is grandparent of the object
 console.log(myNewObjConstructor instanceof ConstructorMethod);
+//We can also inherit the class via prototype
+function PrototypeInherit(x,y,z)
+{
+    this.x = x;
+    this.y = y;
+    this.z = z;
+}
+PrototypeInherit.prototype = Object.create(ConstructorMethod.prototype); //We create the object that will inherit after class
+PrototypeInherit.prototype.constructor = PrototypeInherit; //We want to have own constructor - not inherited from parent
+let prototypeInheritObj = new PrototypeInherit(1,2,3);
+console.log("prototype = " + prototypeInheritObj.substract()); //We can also override this method if we want
 /*********************************THE NEWEST WAY TO DEFINE CLASSES - CLASS************************/
 //It always works as 'use strict'
 class ClassMethod //We define the class, it contains methods and fields (attributes)
