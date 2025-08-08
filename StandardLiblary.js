@@ -105,7 +105,7 @@ dataView.setInt16(offsetOfDataView, numberWeWantToSave, isLittleEnding); //we se
 console.log("little ending = " + dataView.getInt16(offsetOfDataView, isLittleEnding));
 console.log("big ending = " + dataView.getInt16(offsetOfDataView, !isLittleEnding));
 //*******************************************REGEX******************************* */
-// ^ - negation [^abc] - everything except abc
+// ^ - negation [^abc] - everything except abc OR BEGINNING!
 // \s - white signs - space, table
 // \S - everything except white signs
 // \d - digits
@@ -116,3 +116,62 @@ console.log("big ending = " + dataView.getInt16(offsetOfDataView, !isLittleEndin
 // ? - zero or one
 // \x for example \1 - n'th sub regex used - ([abc])[^abc]\1 - in that case \1 is [abc]
 // If we don't want to create a group to call it later, we have to use ([abc])(?:[^abc])+ \1 means [abc] the second part is only to separate logicaly not to create a group -> (?:)
+//From version ES2018 we can create the group names!
+//(?<name>[a-z]*) -> then we can call it by name (?<...>)
+//To call the named group we have to call \k<name>
+// \b where the word ends - \bMyWord\b
+// (?=x) - the word has to end with x regex -> (?!x) is a negation for it
+// (?<=x) - the word has to begin with x regex -> (?<!x) is a negation for it - ES2018
+//***FLAGS**/
+// \g -- global - search everywhere
+// \I -- do not care about upper case and lower case
+// \m -- we search in multiline text
+// \s -- . (every character) also means \n - ES2018
+// \u -- unicode - ES6
+// \y -- sticky - search that matches only from the lastIndex - https://www.w3schools.com/jsref/jsref_regexp_y.asp
+console.log("Do we found regex = " + "Mmm555aaA".search(/^[m]+[0-9]+.*$/ui)); // return position
+console.log("Do we found regex = " + "Mmm555aaA".search(/^[g]+[0-9]+.*$/ui)); //or -1 if it not found
+let text1 = "AbCdEfGhIjKl";
+text1 = text1.replace(/([A-Z])/g, (foundMatched, arg1) => arg1.toLowerCase()); // \g global - all findings! $1 we call our group
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement
+console.log(text1);
+//NOT IN FIREFOX :(
+let text2 = "AbCdEfGhIjKl";
+text2 = text2.replace(/($<named_group>[A-Z])/g, " UpperCase $<named_group> "); // \g global - all findings! We can also call named group
+console.log(text2);
+let textWithDigits = "1a2b3c4d5e6f";
+let found = textWithDigits.match(/\d/g);
+console.log("There are matched values = " +found); //It it found nothing -> returns null
+console.log("The first element of array is first element found, the rest are our groups = "+textWithDigits.match(/(\d)+/)); //works only without flag \g
+let myStickyRegex = /(\d)+/y;
+myStickyRegex.lastIndex = 3; //We will start search from this index
+console.log("Sticky search = "+textWithDigits.match(myStickyRegex));
+//after the operation, lastIndex move to the beginning -> lastIndex = 0
+console.log("Sticky search = "+textWithDigits.match(myStickyRegex));
+//ES2020 - try to match within whole text
+for(let it of textWithDigits.matchAll(/(\d)/g))
+{
+  console.log("The whole text = " + it.input +" at the position "+it.index+" and there is also a group " +it[0]);
+}
+let initRegex = new RegExp("(\\d+)", "g"); //We put the regex and the flag -- remember to add here double \
+console.log("My regex = " + initRegex.source);
+console.log("Flag used for the regex = "+initRegex.flags);
+console.log("Do we use global flag? "+initRegex.global);
+console.log("Do we ignore the case? "+initRegex.ignoreCase);
+console.log("Do we use multiline flag? "+initRegex.multiline);
+console.log("Do dot also means end of the line? "+initRegex.dotAll);
+console.log("Do we use unicode? "+initRegex.unicode);
+console.log("Do we use sticky? "+initRegex.sticky);
+console.log("Where we start searching? "+initRegex.lastIndex);
+console.log("Do regex match "+initRegex.test(textWithDigits));
+initRegex.lastIndex = 0; // exec has to start from the beginning!
+//ATTENTION! This method ca cause a lot of problems. Use -> matchAll 
+while ((it = initRegex.exec(textWithDigits)) !== null) //never use regex directly here
+//it could cause endless loop!
+//If we use regex direclty on each run we set lastIndex to 0!
+//Always use variable here, so the program can move lastIndex
+{
+  console.log("The whole text = " + it.input +" at the position "+it.index+" and there is also a group " +it[0]);
+}
+//******************DATA AND TIME**************************************/
+
