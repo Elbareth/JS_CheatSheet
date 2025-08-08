@@ -174,4 +174,29 @@ while ((it = initRegex.exec(textWithDigits)) !== null) //never use regex directl
   console.log("The whole text = " + it.input +" at the position "+it.index+" and there is also a group " +it[0]);
 }
 //******************DATA AND TIME**************************************/
+let now = new Date();
+console.log("now = "+now);
+let mili = 0; // number of miliseconds passed from 01.01.1970
+let then = new Date(mili);
+console.log("then = "+then);
+let year = 2012;
+let month = 11; //ATTENTION! The fiest month is 0!
+let day = 21;
+let hour = 0;
+let minute = 0;
+let second = 0;
+let milisec = 0;
+let setTheWholeDate = new Date(year, month, day, hour, minute, second, milisec);
+console.log("I set the whole date = " + setTheWholeDate);
+console.log("Number of seconds passed = " +now.getTime());
+setTheWholeDate = setTheWholeDate.setDate(setTheWholeDate.getDate() + 15); //15 days from the date
+console.log("After 15 days = "+new Date(setTheWholeDate)); //Sat Jan 05 2013 00:00:00 GMT+0100 (czas środkowoeuropejski standardowy) --local time
+console.log("UTC = " +now.toUTCString()); //Fri, 08 Aug 2025 14:02:28 GMT -- GMT!
+console.log("ISO = " +now.toISOString()); //2025-08-08T14:02:28.892Z -- GMT!
+console.log("LocaleString  = "+now.toLocaleString()); //8.08.2025, 16:05:15 -- local time
+console.log("LocaleDate = " +now.toLocaleDateString()); //8.08.2025 -- local time
+console.log("LocaleTime = " +now.toLocaleTimeString()); //16:02:28 -- local time
+console.log("DateString = "+now.toDateString()); //Fri Aug 08 2025 -- local time BUT NO local settings!
+console.log("TimeString = "+now.toTimeString()); //16:05:15 GMT+0200 (czas środkowoeuropejski letni) BUT NO local settings!
+
 
