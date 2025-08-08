@@ -198,5 +198,24 @@ console.log("LocaleDate = " +now.toLocaleDateString()); //8.08.2025 -- local tim
 console.log("LocaleTime = " +now.toLocaleTimeString()); //16:02:28 -- local time
 console.log("DateString = "+now.toDateString()); //Fri Aug 08 2025 -- local time BUT NO local settings!
 console.log("TimeString = "+now.toTimeString()); //16:05:15 GMT+0200 (czas środkowoeuropejski letni) BUT NO local settings!
-
+/*************************ERRORS****************************/
+//EvalError -- used only for comapibility reason - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError
+//RangeError -- outOfRange - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError
+//ReferenceError -- when we call the variable that is not existed - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError
+//SyntaxError -- invalid code - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
+//TypeError -- invalid type of object - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError
+//URIError -- URI handling function was used in wrong way - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError
+class MyOwnException extends Error
+{
+  constructor(nameOfFunction, lineOfCode, comment)
+  {
+      super(`[${nameOfFunction}] ${new Date().toLocaleString()} Error occured on line ${lineOfCode} - reason: ${comment}`); // constuctor of the parent needs message
+      this.nameOfFunction = nameOfFunction;
+      this.lineOfCode = lineOfCode;
+      this.comment = comment;
+  }
+  get name() {return "MyOwnException"};
+}
+let error = new MyOwnException("StandardLibrary.js", "219", "We throw an error just in case");
+console.log(error.message);
 
