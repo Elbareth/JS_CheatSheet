@@ -218,4 +218,45 @@ class MyOwnException extends Error
 }
 let error = new MyOwnException("StandardLibrary.js", "219", "We throw an error just in case");
 console.log(error.message);
+//*************************JSON**************/
+let obj = 
+{
+    "_removeMe" : "please",
+    "text1" : "abc",
+    "text2" : "xyz",
+    "currentDate" : new Date() //The date will be converted to .toISOString(). Then it will be parsed as a string!
+};
+let myJSON = JSON.stringify(obj);
+console.log("I serialized the object  - stringify = "+myJSON);
+let obj2 = JSON.parse(myJSON);
+console.log("I deserialize the object - parse = "+obj2);
+//to deserialize the object, so the date will be date not string - we have to call function 
+//if the function return undefined, it will remove the attribute from the object
+let obj3 = JSON.parse(myJSON, (key, value) => {
+    if(key.includes("_")) return undefined; //we will remove attributes with _ from the objecy
+    if(/^\d\d\d\d-\d\d-\d\dT\d\d:\d\d"\d\d.\d\d\dZ$/.test(value))
+    {
+        return new Date(value);
+    }
+    return value;
+});
+//The second argument of stringify is also function - similar to parse - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+console.log(JSON.stringify(obj3, null, 2)); //The third argument will show the JSON prettier - with some white spaces
+//**********************************International app************/
+//ECMA402!
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+let pln = Intl.NumberFormat("pl",
+{ //optional
+    style: "currency", //what is our number?
+    currency: "PLN", //what currency we will be using
+    currencyDisplay: "name", //show me the name of the currecny
+    useGrouping: true, //should be group the number if it's big?
+    minimumIntegerDigits: 10, //how many zeros will be added at the beginning?
+    minimumFractionDigits: 2, //how many zeros will be added if the decimanl is too small
+    maximumFractionDigits: 2,  //how many zeros will be added if the decimanl is too small
+    minimumSignificantDigits: 1, //how many number is important - e notation
+    maximumSignificantDigits: 21 //how many number is important - e notation
+});
+console.log(pln.format(10000000000.99));
+
 
