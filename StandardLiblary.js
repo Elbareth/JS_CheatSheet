@@ -259,4 +259,51 @@ let pln = Intl.NumberFormat("pl",
 });
 console.log(pln.format(10000000000.99));
 
+let plDate = Intl.DateTimeFormat("pl", {
+  //optional
+  year: "numeric", //numeric - 4 digits, 2-digit - 2 digits ;P
+  month: "long", //full name for the month
+  day: "2-digit", //the day will contain 0 at the beginning if it's needed
+  weekday: "long", //the name of the weekday
+  era: "long", //BC (p.n.e.) AC (n.e.)
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  timeZone: "Europe/Warsaw",
+  timeZoneName: "long", //full name of the time timeZone
+  hour12: false, //do we will use 12-clock? 
+  hourCycle: "h23" //we want to have midnight at 00:00
+});
+console.log(plDate.format(new Date()));
 
+let plCompare = Intl.Collator("pl",
+{
+  //optional
+  usage: "sort",
+  sensitivity: "variant", //should we distinguished the accents? How about upper case?
+  ignorePunctuation: true, //should we look at white spaces?
+  numeric: true, //we want to treat number as a number not string
+  caseFirst: "upper" //upper case should be before lower case
+}).compare;
+let arrayToSort = [1,10,100,2,"Anna", "ala", "Basia", "    Zosia"];
+arrayToSort = arrayToSort.sort(plCompare);
+console.log(arrayToSort);
+
+let a = "a";
+let b = "b";
+console.assert(a==b, "A and B are not equal"); //it check the condition; if the condition does not match it showns the message
+//console.clear(); //it will clear the console
+console.table(arrayToSort); //it should show the data in the table
+console.trace(); //it should show the stacktrace
+console.group("group1"); //We can create a group of messages
+console.log("a");
+console.log("a");
+console.log("a");
+///console.groupEnd(); -- if we want to cancel the grouping
+console.time(); //We detect the time
+for(let i = 0; i < 10000; i++)
+{
+    //do nothing
+}
+console.timeLog("We end our loop after some time"); //It will show the time passed
+//We can use the same options for console.log as in C printf
