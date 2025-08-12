@@ -301,9 +301,37 @@ console.log("a");
 console.log("a");
 ///console.groupEnd(); -- if we want to cancel the grouping
 console.time(); //We detect the time
-for(let i = 0; i < 10000; i++)
-{
-    //do nothing
-}
+setTimeout(() => console.log("Done"), 1000);
 console.timeLog("We end our loop after some time"); //It will show the time passed
 //We can use the same options for console.log as in C printf
+
+//*****************************URL************************/
+//all of them (except origin) are meditable!!!
+let url = new URL("https://www.myPage.com:8080/path/param?par1=name1&par2=name2#index");
+console.log("href = "+url.href); //the whole!
+console.log("origin = "+url.origin); //https://www.mypage.com:8080
+console.log("protocol = "+url.protocol); //https:
+console.log("host = "+url.host); //www.mypage.com:8080
+console.log("hostname = "+url.hostname); //www.mypage.com
+console.log("port = "+url.port); //8080
+console.log("pathname = "+url.pathname); // /path/param
+console.log("search = "+url.search); //?par=name
+console.log("hash = "+url.hash); //#index
+url.searchParams.append("param3", "name3"); //URLSearchParams
+console.log("search = "+url.search); //?par=name
+console.log("That the value for the key = " +url.searchParams.get("par1"));
+console.log("Do we have the key = "+url.searchParams.has("par1"));
+url.searchParams.sort(); //we can even sort our search parameters :O
+let searchParamArr = [...url.searchParams];
+console.log(searchParamArr);
+let url2 = new URL("https://www/newExample.pl");
+let params = new URLSearchParams();
+params.append("key1", "value1");
+params.append("key2", "value2");
+url2.search = params.toString();
+console.log(url2.href);
+
+let interval = setInterval(() => {  
+  console.log(new Date().toLocaleString());
+}, 1000); //it will run regularly in interval
+setTimeout(() => clearInterval(interval), 100000); // after some time we will cancel our interval
